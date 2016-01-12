@@ -1,15 +1,15 @@
 from setuptools import setup
 
 setup(
-    name='SpreadFlowProcThumbor',
+    name='SpreadFlowThumbor',
     version='0.0.1',
     description='Thumbor support for SpreadFlow metadata extraction and processing engine',
     author='Lorenz Schori',
     author_email='lo@znerol.ch',
-    url='https://github.com/znerol/spreadflow-proc-thumbor',
+    url='https://github.com/znerol/spreadflow-thumbor',
     packages=[
-        'spreadflow_proc_thumbor',
-        'spreadflow_proc_thumbor.test'
+        'spreadflow_thumbor',
+        'spreadflow_thumbor.test'
     ],
     install_requires=[
         'SpreadFlowCore'

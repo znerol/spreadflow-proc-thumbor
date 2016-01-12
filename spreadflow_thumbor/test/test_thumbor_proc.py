@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from twisted.trial import unittest
 
-from spreadflow_proc_thumbor import ThumborService, ThumborUrlGenerator
+from spreadflow_thumbor.proc import ThumborService, ThumborUrlGenerator
 
 
-class SpreadflowProcThumborTestCase(unittest.TestCase):
+class SpreadflowThumborTestCase(unittest.TestCase):
     pass
