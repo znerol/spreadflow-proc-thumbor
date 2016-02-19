@@ -30,7 +30,7 @@ class SpreadflowThumborUrlGeneratorTest(TestCase):
 
     @run_test_with(AsynchronousDeferredRunTest)
     @defer.inlineCallbacks
-    def test_proc(self):
+    def test_static_options(self):
         generated_url = 'https://thumbor-service/subdir/P7hdoki2Gql1i9_XIb8pRIVPSHI=/fit-in/1024x1024/http://example.com/path/to/image.jpg'
 
         srv = Mock(spec=ThumborService)
@@ -51,6 +51,44 @@ class SpreadflowThumborUrlGeneratorTest(TestCase):
 
         expected = copy.deepcopy(item)
         expected['data']['a']['thumbnail'] = generated_url
+
+        send_matcher = MatchesSendDeltaItemInvocation(expected, gen)
+        send = Mock(spec=Scheduler.send)
+        yield gen(item, send)
+        self.assertEquals(send.call_count, 1)
+        self.assertThat(send.call_args, send_matcher)
+        expected_options = {
+            'fit_in': True,
+            'width': '1024',
+            'height': 1024,
+            'image_url': 'http://example.com/path/to/image.jpg'
+        }
+        srv.generate_url.assert_called_once_with(expected_options)
+
+    @run_test_with(AsynchronousDeferredRunTest)
+    @defer.inlineCallbacks
+    def test_dynamic_options(self):
+        generated_url = 'https://thumbor-service/subdir/P7hdoki2Gql1i9_XIb8pRIVPSHI=/fit-in/1024x1024/http://example.com/path/to/image.jpg'
+
+        srv = Mock(spec=ThumborService)
+        srv.generate_url.return_value = generated_url
+
+        gen = ThumborUrlGenerator(srv, key='custom_url', destkey='custom_dest', optionskey='thumbor_options')
+
+        options = {'fit_in': True, 'width': '1024', 'height': 1024}
+        item = {
+            'inserts': ['a'],
+            'deletes': [],
+            'data': {
+                'a': {
+                    'thumbor_options': options,
+                    'custom_url': 'http://example.com/path/to/image.jpg',
+                }
+            }
+        }
+
+        expected = copy.deepcopy(item)
+        expected['data']['a']['custom_dest'] = generated_url
 
         send_matcher = MatchesSendDeltaItemInvocation(expected, gen)
         send = Mock(spec=Scheduler.send)

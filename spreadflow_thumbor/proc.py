@@ -16,15 +16,23 @@ class ThumborService(object):
 
 class ThumborUrlGenerator(object):
 
-    def __init__(self, service, options, key='content_url', destkey='thumbnail'):
+    def __init__(self, service, key='content_url', destkey='thumbnail', options=None, optionskey=None):
         self.service = service
-        self.options = options
         self.key = key
         self.destkey = destkey
+        self.options = options
+        self.optionskey = optionskey
+
+        if not (self.options == None) ^ (self.optionskey == None):
+            raise ValueError('Either options or optionskey is required')
 
     def __call__(self, item, send):
         for oid in item['inserts']:
-            options = self.options.copy()
+            if self.options:
+                options = self.options.copy()
+            else:
+                options = item['data'][oid][self.optionskey].copy()
+
             options['image_url'] = item['data'][oid][self.key]
             item['data'][oid][self.destkey] = self.service.generate_url(options)
 
