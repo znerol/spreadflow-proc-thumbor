@@ -6,12 +6,12 @@ from libthumbor import CryptoURL
 
 class ThumborService(object):
 
-    def __init__(self, thumborBaseUrl='http://localhost:8888/', thumborKey='MY_SECURE_KEY'):
-        self.thumborBaseUrl = thumborBaseUrl.rstrip('/')
-        self._urlgen= CryptoURL(key=thumborKey)
+    def __init__(self, baseurl='http://localhost:8888/', secretkey='MY_SECURE_KEY'):
+        self.baseurl = baseurl.rstrip('/')
+        self._urlgen = CryptoURL(key=secretkey)
 
     def generate_url(self, options):
-        return self.thumborBaseUrl + self._urlgen.generate(**options)
+        return self.baseurl + self._urlgen.generate(**options)
 
 
 class ThumborUrlGenerator(object):

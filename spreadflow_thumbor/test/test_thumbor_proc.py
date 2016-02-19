@@ -19,7 +19,7 @@ from spreadflow_thumbor.proc import ThumborService, ThumborUrlGenerator
 class SpreadflowThumborServiceTestCase(TestCase):
 
     def test_generate_hmac_url(self):
-        srv = ThumborService(thumborBaseUrl='https://thumbor-service/subdir/', thumborKey='secret')
+        srv = ThumborService(baseurl='https://thumbor-service/subdir/', secretkey='secret')
         expected = 'https://thumbor-service/subdir/P7hdoki2Gql1i9_XIb8pRIVPSHI=/fit-in/1024x1024/http://example.com/path/to/image.jpg'
         options = {'fit_in': True, 'width': '1024', 'height': 1024, 'image_url': 'http://example.com/path/to/image.jpg'}
         result = srv.generate_url(options)
