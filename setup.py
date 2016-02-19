@@ -19,7 +19,8 @@ setup(
         'spreadflow_thumbor.test'
     ],
     install_requires=[
-        'SpreadFlowCore'
+        'SpreadFlowCore',
+        'libthumbor'
     ],
     tests_require=tests_require,
     extras_require={
