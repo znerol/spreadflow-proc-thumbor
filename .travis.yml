@@ -6,4 +6,6 @@ install:
   - python bootstrap.py
   - bin/buildout
 script:
-  - bin/trial spreadflow_thumbor
+  - bin/coverage run bin/trial spreadflow_thumbor
+after_success:
+  - bin/coveralls

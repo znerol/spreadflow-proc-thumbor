@@ -1,5 +1,12 @@
 from setuptools import setup
 
+tests_require = [
+    'SpreadFlowDelta[tests]',
+    'coveralls',
+    'mock',
+    'testtools'
+]
+
 setup(
     name='SpreadFlowThumbor',
     version='0.0.1',
@@ -14,6 +21,10 @@ setup(
     install_requires=[
         'SpreadFlowCore'
     ],
+    tests_require=tests_require,
+    extras_require={
+        'tests': tests_require
+    },
     zip_safe=False,
     classifiers=[
         'Development Status :: 3 - Alpha',
