@@ -10,7 +10,7 @@ import os
 class ThumborService(object):
 
     def __init__(self, thumborBaseUrl='http://localhost:8888/', thumborKey=None):
-        self.thumborBaseUrl = thumborBaseUrl if isinstance(thumborBaseUrl, unicode) else thumborBaseUrl.decode('utf-8')
+        self.thumborBaseUrl = thumborBaseUrl if isinstance(thumborBaseUrl, bytes) else thumborBaseUrl.encode('ascii')
 
         if thumborKey:
             self.thumborKey = thumborKey if isinstance(thumborKey, bytes) else thumborKey.encode('utf-8')
@@ -18,9 +18,13 @@ class ThumborService(object):
             self.thumborKey = None
 
     def generate_url(self, operations, target_url):
-        op = "/".join(operations + (target_url,))
-        key = base64.urlsafe_b64encode(hmac.new(self.thumborKey, op.encode('utf-8'), hashlib.sha1).digest()) if self.thumborKey else 'unsafe'
-        return self.thumborBaseUrl + key + u'/' + op
+        operations = [op if isinstance(op, bytes) else op.encode('ascii') for op in operations]
+        target_url = target_url if isinstance(target_url, bytes) else target_url.encode('ascii')
+        operations.append(target_url)
+
+        op = b'/'.join(operations)
+        key = base64.urlsafe_b64encode(hmac.new(self.thumborKey, op, hashlib.sha1).digest()) if self.thumborKey else b'unsafe'
+        return (self.thumborBaseUrl + key + b'/' + op).decode('ascii')
 
 
 class ThumborUrlGenerator(object):
