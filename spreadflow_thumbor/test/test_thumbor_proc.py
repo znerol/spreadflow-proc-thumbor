@@ -35,7 +35,7 @@ class SpreadflowThumborUrlGeneratorTest(TestCase):
 
     @run_test_with(AsynchronousDeferredRunTest)
     @defer.inlineCallbacks
-    def test_spec_document_example(self):
+    def test_proc(self):
         generated_url = 'https://thumbor-service/subdir/P7hdoki2Gql1i9_XIb8pRIVPSHI=/fit-in/1024x1024/http://example.com/path/to/image.jpg'
 
         srv = Mock(spec=ThumborService)
