@@ -54,10 +54,7 @@ class SpreadflowThumborUrlGeneratorTest(TestCase):
         }
 
         expected = copy.deepcopy(item)
-        expected['data']['a']['thumbnail'] = {
-            'filename': 'image.jpg',
-            'url': generated_url
-        }
+        expected['data']['a']['thumbnail'] = generated_url
 
         send_matcher = MatchesSendDeltaItemInvocation(expected, gen)
         send = Mock(spec=Scheduler.send)

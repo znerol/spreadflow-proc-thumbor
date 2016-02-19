@@ -33,13 +33,7 @@ class ThumborUrlGenerator(object):
 
     def __call__(self, item, send):
         for oid in item['inserts']:
-            base = os.path.splitext(item['data'][oid][self.key])[0]
-            filename = os.path.basename(base) + '.jpg'
-
-            item['data'][oid][self.destkey] = {
-                'url': self.service.generate_url(self.operations, item['data'][oid][self.key]),
-                'filename': filename,
-            }
+            item['data'][oid][self.destkey] = self.service.generate_url(self.operations, item['data'][oid][self.key])
 
         send(item, self)
 
