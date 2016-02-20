@@ -23,7 +23,7 @@ class ThumborUrlGenerator(object):
         self.options = options
         self.optionskey = optionskey
 
-        if not (self.options == None) ^ (self.optionskey == None):
+        if not (self.options is None) ^ (self.optionskey is None):
             raise ValueError('Either options or optionskey is required')
 
     def __call__(self, item, send):
