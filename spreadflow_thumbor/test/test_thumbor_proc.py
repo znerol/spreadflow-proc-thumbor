@@ -7,7 +7,7 @@ import copy
 from twisted.internet import defer
 
 from mock import Mock
-from testtools import TestCase, run_test_with
+from testtools import ExpectedException, TestCase, run_test_with
 from testtools.twistedsupport import AsynchronousDeferredRunTest
 
 from spreadflow_core.scheduler import Scheduler
@@ -102,3 +102,13 @@ class SpreadflowThumborUrlGeneratorTest(TestCase):
             'image_url': 'http://example.com/path/to/image.jpg'
         }
         srv.generate_url.assert_called_once_with(expected_options)
+
+    def test_fail_if_constructed_with_dynamic_and_static_options(self):
+        srv = Mock(spec=ThumborService)
+        with ExpectedException(ValueError, 'Either options or optionskey is required'):
+            ThumborUrlGenerator(srv, options={}, optionskey='thumbor_options')
+
+    def test_fail_if_constructed_with_no_options(self):
+        srv = Mock(spec=ThumborService)
+        with ExpectedException(ValueError, 'Either options or optionskey is required'):
+            ThumborUrlGenerator(srv)
