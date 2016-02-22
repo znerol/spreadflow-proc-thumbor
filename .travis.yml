@@ -2,10 +2,14 @@ language: python
 python:
   - 2.7
   - 3.4
+cache:
+  directories:
+    - $HOME/.cache/pip
 install:
-  - python bootstrap.py
-  - bin/buildout
+  - pip install -U pip wheel
+  - pip install -r test-requirements.txt
+  - pip install -e .[tests]
 script:
-  - bin/coverage run bin/trial spreadflow_thumbor
+  - coverage run `which trial` spreadflow_thumbor
 after_success:
-  - bin/coveralls
+  - coveralls
