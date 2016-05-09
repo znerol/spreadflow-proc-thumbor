@@ -1,10 +1,10 @@
 SpreadFlow Thumbor
 ==================
 
-.. image:: https://travis-ci.org/znerol/spreadflow-thumbor.svg?branch=master
-    :target: https://travis-ci.org/znerol/spreadflow-thumbor
-.. image:: https://coveralls.io/repos/github/znerol/spreadflow-thumbor/badge.svg?branch=master
-    :target: https://coveralls.io/github/znerol/spreadflow-thumbor?branch=master
+.. image:: https://travis-ci.org/spreadflow/spreadflow-thumbor.svg?branch=master
+    :target: https://travis-ci.org/spreadflow/spreadflow-thumbor
+.. image:: https://coveralls.io/repos/github/spreadflow/spreadflow-thumbor/badge.svg?branch=master
+    :target: https://coveralls.io/github/spreadflow/spreadflow-thumbor?branch=master
 
 
 Thumbor support for SpreadFlow metadata extraction and processing engine.
