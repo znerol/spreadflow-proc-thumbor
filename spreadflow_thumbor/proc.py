@@ -37,7 +37,3 @@ class ThumborUrlGenerator(object):
             item['data'][oid][self.destkey] = self.service.generate_url(options)
 
         send(item, self)
-
-    @property
-    def dependencies(self):
-        yield (self, self.service)
