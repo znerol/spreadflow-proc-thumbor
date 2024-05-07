@@ -2,9 +2,9 @@ from setuptools import setup
 
 tests_require = [
     'SpreadFlowDelta[tests]',
-    'coveralls',
+    'fixtures',
     'mock',
-    'testtools'
+    'testtools',
 ]
 
 setup(
