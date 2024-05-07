@@ -3,6 +3,13 @@
 
 [run]
 branch = True
-source = spreadflow_thumbor
+source_pkgs =
+    spreadflow_thumbor
 omit =
-    spreadflow_thumbor/test/*
+    /tmp/**
+    spreadflow_thumbor/test/**
+
+[report]
+omit =
+    /tmp/**
+    spreadflow_thumbor/test/**
